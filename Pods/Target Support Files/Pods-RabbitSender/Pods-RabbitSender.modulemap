@@ -1,0 +1,6 @@
+framework module Pods_RabbitSender {
+  umbrella header "Pods-RabbitSender-umbrella.h"
+
+  export *
+  module * { export * }
+}
