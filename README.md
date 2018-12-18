@@ -1,6 +1,8 @@
 # RabbitMQSender
 RabbitMQ Message Sender Tool
 
+![](https://ws1.sinaimg.cn/large/006tNbRwgy1fyaz92qi5hj308w0fs3yw.jpg)
+
 ## 使用说明
 1. 点击app右上角“Account"按钮，输入RabbitMQ 服务器的账号、密码和主机地址；
 2. 点击app左上角按钮添加 json 字符串，建议使用复制粘贴到输入框；
@@ -19,8 +21,8 @@ RabbitMQ Message Sender Tool
 }
 
 ```
-routing-key: routing-key
-msg: 消息数组
-time-cell: msg数组数据之间的发送的时间间隔，时间为秒
+- routing-key: routing-key
+- msg: 消息数组
+- time-cell: msg数组数据之间的发送的时间间隔，时间为秒
 
 
