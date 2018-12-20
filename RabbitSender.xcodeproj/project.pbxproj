@@ -12,7 +12,6 @@
 		01156C9F21BBA6DF004E12A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01156C9D21BBA6DF004E12A0 /* Main.storyboard */; };
 		01156CA121BBA6E7004E12A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01156CA021BBA6E7004E12A0 /* Assets.xcassets */; };
 		01156CA421BBA6E7004E12A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01156CA221BBA6E7004E12A0 /* LaunchScreen.storyboard */; };
-		01156CAC21BBC572004E12A0 /* Info_zhr_c.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01156CAB21BBC571004E12A0 /* Info_zhr_c.plist */; };
 		01575A8321C87C3F006AD3E5 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01575A8221C87C3F006AD3E5 /* EditViewController.swift */; };
 		01E2922B21C8C76100FD9387 /* HomeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E2922A21C8C76000FD9387 /* HomeListCell.swift */; };
 		4567A4273D65D7256BF9C406 /* Pods_RabbitSender.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89E40C1079F9376A620B1CE7 /* Pods_RabbitSender.framework */; };
@@ -26,7 +25,6 @@
 		01156CA021BBA6E7004E12A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01156CA321BBA6E7004E12A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01156CA521BBA6E7004E12A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		01156CAB21BBC571004E12A0 /* Info_zhr_c.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info_zhr_c.plist; sourceTree = "<group>"; };
 		01575A8221C87C3F006AD3E5 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		01E2922A21C8C76000FD9387 /* HomeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListCell.swift; sourceTree = "<group>"; };
 		74BEF84E5CE69FB6277AA150 /* Pods-RabbitSender.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RabbitSender.release.xcconfig"; path = "Pods/Target Support Files/Pods-RabbitSender/Pods-RabbitSender.release.xcconfig"; sourceTree = "<group>"; };
@@ -71,7 +69,6 @@
 				01156C9B21BBA6DF004E12A0 /* ViewController.swift */,
 				01E2922A21C8C76000FD9387 /* HomeListCell.swift */,
 				01575A8221C87C3F006AD3E5 /* EditViewController.swift */,
-				01156CAB21BBC571004E12A0 /* Info_zhr_c.plist */,
 				01156C9D21BBA6DF004E12A0 /* Main.storyboard */,
 				01156CA021BBA6E7004E12A0 /* Assets.xcassets */,
 				01156CA221BBA6E7004E12A0 /* LaunchScreen.storyboard */,
@@ -160,7 +157,6 @@
 				01156CA421BBA6E7004E12A0 /* LaunchScreen.storyboard in Resources */,
 				01156CA121BBA6E7004E12A0 /* Assets.xcassets in Resources */,
 				01156C9F21BBA6DF004E12A0 /* Main.storyboard in Resources */,
-				01156CAC21BBC572004E12A0 /* Info_zhr_c.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
