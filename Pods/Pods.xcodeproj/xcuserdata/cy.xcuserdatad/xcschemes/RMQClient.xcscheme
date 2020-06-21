@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D5EEC3C1533984F5F9C8E7C982C658C4"
+               BlueprintIdentifier = "D015D7C0C1EE9DDC863F493A9551FFE3"
+               BuildableName = "RMQClient.framework"
                BlueprintName = "RMQClient"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "RMQClient.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

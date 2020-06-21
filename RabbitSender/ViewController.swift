@@ -152,10 +152,15 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     @IBAction func leftNavBarButtonClicked(_ sender: Any) {
         let appearance = SCLAlertView.SCLAppearance(
+            
             kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
             kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
             kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
-            showCloseButton: false
+            showCloseButton: false,
+//            circleBackgroundColor: UIColor.systemGray2,
+            contentViewColor: UIColor.systemBackground,
+            titleColor: UIColor.label
+            
         )
         
         // Initialize SCLAlertView using custom Appearance
@@ -166,21 +171,22 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         // Add textfield 1
         let textfield1 = UITextField(frame: CGRect(x: x,y: 10,width: 180,height: 25))
-        textfield1.layer.borderColor = UIColor.green.cgColor
+//        textfield1.layer.borderColor = UIColor.green.cgColor
         textfield1.layer.borderWidth = 1.5
+//        textfield1.backgroundColor = UIColor.systemBackground
         textfield1.layer.cornerRadius = 5
         textfield1.placeholder = "Title"
-        textfield1.textAlignment = NSTextAlignment.center
+//        textfield1.textAlignment = NSTextAlignment.center
         subview.addSubview(textfield1)
         
         // Add textfield 2
         let textfield2 = UITextField(frame: CGRect(x: x,y: textfield1.frame.maxY + 10,width: 180,height: 25))
-        textfield2.layer.borderColor = UIColor.blue.cgColor
+//        textfield2.layer.borderColor = UIColor.blue.cgColor
         textfield2.layer.borderWidth = 1.5
         textfield2.layer.cornerRadius = 5
-        textfield1.layer.borderColor = UIColor.blue.cgColor
         textfield2.placeholder = "RabbitMQ Json String"
-        textfield2.textAlignment = NSTextAlignment.center
+//        textfield2.textColor = UIColor.label
+//        textfield2.textAlignment = NSTextAlignment.center
         subview.addSubview(textfield2)
         
         // Add the subview to the alert's UI property
@@ -200,11 +206,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             }
             
         }
-        alert.addButton("Cancel", backgroundColor: UIColor.brown, textColor: UIColor.yellow, showTimeout: nil) {
+        alert.addButton("Cancel", backgroundColor: UIColor.systemGray3, textColor: UIColor.label, showTimeout: nil) {
             print("Cancel Button tapped")
         }
         
-        alert.showInfo("Save", subTitle: "", closeButtonTitle: "Cancel")
+        alert.showInfo("Save", subTitle: "saved json data", closeButtonTitle: "Cancel")
     }
     
     @IBAction func rightNavBarButtonClicked(_ sender: Any) {
@@ -214,7 +220,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
             kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
             kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
-            showCloseButton: false
+            showCloseButton: false,
+            contentViewColor: UIColor.systemBackground,
+                    titleColor: UIColor.label
         )
         
         // Initialize SCLAlertView using custom Appearance
@@ -225,7 +233,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         // Add textfield 1
         let textfield1 = UITextField(frame: CGRect(x: x,y: 10,width: 180,height: 25))
-        textfield1.layer.borderColor = UIColor.green.cgColor
+//        textfield1.layer.borderColor = UIColor.green.cgColor
         textfield1.layer.borderWidth = 1.5
         textfield1.layer.cornerRadius = 5
         textfield1.placeholder = "Username"
@@ -234,27 +242,25 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         // Add textfield 2
         let textfield2 = UITextField(frame: CGRect(x: x,y: textfield1.frame.maxY + 10,width: 180,height: 25))
-        textfield2.layer.borderColor = UIColor.blue.cgColor
+//        textfield2.layer.borderColor = UIColor.blue.cgColor
         textfield2.layer.borderWidth = 1.5
         textfield2.layer.cornerRadius = 5
-        textfield1.layer.borderColor = UIColor.blue.cgColor
         textfield2.placeholder = "Password"
         textfield2.textAlignment = NSTextAlignment.center
         subview.addSubview(textfield2)
         
         // Add textfield 3
         let textfield3 = UITextField(frame: CGRect(x: x,y: textfield2.frame.maxY + 10,width: 180,height: 25))
-        textfield3.layer.borderColor = UIColor.blue.cgColor
+//        textfield3.layer.borderColor = UIColor.blue.cgColor
         textfield3.layer.borderWidth = 1.5
         textfield3.layer.cornerRadius = 5
-        textfield2.layer.borderColor = UIColor.blue.cgColor
         textfield3.placeholder = "Host"
         textfield3.textAlignment = NSTextAlignment.center
         subview.addSubview(textfield3)
         
         // Add the subview to the alert's UI property
         alert.customSubview = subview
-        alert.addButton("Login") {
+        alert.addButton("Add Host") {
             print("Logged in")
             let user = textfield1.text
             let password = textfield2.text
@@ -265,11 +271,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
         
         // Add Button with Duration Status and custom Colors
-        alert.addButton("Cancel", backgroundColor: UIColor.brown, textColor: UIColor.yellow, showTimeout: nil) {
+        alert.addButton("Cancel", backgroundColor: UIColor.systemGray3, textColor: UIColor.label, showTimeout: nil) {
             print("Cancel Button tapped")
         }
         
-        alert.showInfo("Login", subTitle: "", closeButtonTitle: "Login")
+        alert.showInfo("Host Setting", subTitle: "", closeButtonTitle: "Cancel")
     }
     
     func writeFileToPathDocument(text: String, file: String) {
@@ -305,7 +311,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     /// - Returns: 路径下所有文件或者目录的名字
     func getPaths(inPath path:String) -> [String] {
         let manager = FileManager.default
-        let contentsOfPath:[String]?
+        var contentsOfPath:[String]?
         do {
             try contentsOfPath = manager.contentsOfDirectory(atPath: path)
         } catch  {
