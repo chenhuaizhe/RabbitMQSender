@@ -176,7 +176,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 //        textfield1.backgroundColor = UIColor.systemBackground
         textfield1.layer.cornerRadius = 5
         textfield1.placeholder = "Title"
-//        textfield1.textAlignment = NSTextAlignment.center
+        textfield1.textAlignment = NSTextAlignment.center
         subview.addSubview(textfield1)
         
         // Add textfield 2
@@ -186,7 +186,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         textfield2.layer.cornerRadius = 5
         textfield2.placeholder = "RabbitMQ Json String"
 //        textfield2.textColor = UIColor.label
-//        textfield2.textAlignment = NSTextAlignment.center
+        textfield2.textAlignment = NSTextAlignment.center
         subview.addSubview(textfield2)
         
         // Add the subview to the alert's UI property
@@ -195,7 +195,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             print("saved json data")
             let title = textfield1.text
             let jsonString = textfield2.text
-            if !(title == nil || title == "" || jsonString == nil || jsonString == "") {
+            if !(title == nil || title == "") {
                 print("jsonString:\(jsonString!)");
                 let fileName = title! + ".json"
                 self.writeFileToPathDocument(text: jsonString!, file: fileName)
@@ -210,7 +210,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             print("Cancel Button tapped")
         }
         
-        alert.showInfo("Save", subTitle: "saved json data", closeButtonTitle: "Cancel")
+        alert.showInfo("Add RabbitMQ Json String", subTitle: "saved json data", closeButtonTitle: "Cancel")
     }
     
     @IBAction func rightNavBarButtonClicked(_ sender: Any) {

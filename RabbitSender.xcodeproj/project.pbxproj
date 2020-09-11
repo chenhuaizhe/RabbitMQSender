@@ -26,6 +26,7 @@
 		01156CA021BBA6E7004E12A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01156CA321BBA6E7004E12A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01156CA521BBA6E7004E12A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01229FD62507CE230038AEBF /* RabbitSender.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RabbitSender.entitlements; sourceTree = "<group>"; };
 		01575A8221C87C3F006AD3E5 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		01BB9B18249FBD0C00FE7DBF /* rmq-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "rmq-icon.png"; path = "Assets.xcassets/rmq-icon.imageset/rmq-icon.png"; sourceTree = "<group>"; };
 		01E2922A21C8C76000FD9387 /* HomeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListCell.swift; sourceTree = "<group>"; };
@@ -67,6 +68,7 @@
 		01156C9821BBA6DF004E12A0 /* RabbitSender */ = {
 			isa = PBXGroup;
 			children = (
+				01229FD62507CE230038AEBF /* RabbitSender.entitlements */,
 				01156C9921BBA6DF004E12A0 /* AppDelegate.swift */,
 				01156C9B21BBA6DF004E12A0 /* ViewController.swift */,
 				01E2922A21C8C76000FD9387 /* HomeListCell.swift */,
@@ -359,8 +361,9 @@
 			baseConfigurationReference = 95E3C8F886DAD754C9869462 /* Pods-RabbitSender.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RabbitSender/RabbitSender.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 6RTWQ8F94E;
 				INFOPLIST_FILE = RabbitSender/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -368,11 +371,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.youguihua..RabbitSenderTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -381,8 +385,9 @@
 			baseConfigurationReference = 74BEF84E5CE69FB6277AA150 /* Pods-RabbitSender.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RabbitSender/RabbitSender.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 6RTWQ8F94E;
 				INFOPLIST_FILE = RabbitSender/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -390,11 +395,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.youguihua..RabbitSenderTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
