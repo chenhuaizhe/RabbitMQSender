@@ -9,6 +9,7 @@ target 'RabbitSender' do
     pod 'RMQClient', '~> 0.10.0'
     pod 'SCLAlertView'
     pod 'SwiftyJSON', '~> 4.0'
+    pod 'SnapKit', '~> 5.0.0'
 end
 
 

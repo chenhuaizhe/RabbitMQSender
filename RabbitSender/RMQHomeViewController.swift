@@ -10,8 +10,9 @@ import UIKit
 import RMQClient
 import SCLAlertView
 import SwiftyJSON
+import SnapKit
 
-class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class RMQHomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     
     private var dataSource:[String] = [];
@@ -20,21 +21,73 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.initDataSource()
+        
+        self.tableView.tableFooterView = UIView()
+        
+        
+
+    }
+    
+    func drawNoDataView() {
+        let imgView = UIImageView(image: UIImage(named: "nothing"))
+        view.addSubview(imgView)
+
+        let label = UILabel()
+        view.addSubview(label)
+        label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight(10))
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.textColor = UIColor.secondaryLabel.withAlphaComponent(0.8)
+        //    label.textColor = [UIColor whiteColor];
+        label.text = NSLocalizedString("You haven’t added any data yet, go add a few", comment: "")
+
+        imgView.snp.makeConstraints { (make) in
+            make.top.equalTo(view).offset(230)
+            make.centerX.equalTo(view)
+            make.height.equalTo(200)
+            make.width.equalTo(200)
+        }
+       
+
+        label.snp.makeConstraints { (make) in
+            make.top.equalTo(imgView.snp.bottom).offset(30)
+            make.left.equalTo(view).offset(30)
+            make.right.equalTo(view).offset(-30)
+            make.height.equalTo(60)
+
+        }
 
     }
     
     func initDataSource() {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        self.dataSource = self.getPaths(inPath: path)
+        self.dataSource = RMQFileTool.getPaths(inPath: path)
+        if self.dataSource.count == 0 {
+            self.view.sendSubviewToBack(self.tableView)
+            self.drawNoDataView()
+        }else {
+            self.tableView.reloadData()
+            self.view.bringSubviewToFront(self.tableView)
+           
+        }
     }
     
     func updateDataSource() {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        self.dataSource = self.getPaths(inPath: path)
+        self.dataSource = RMQFileTool.getPaths(inPath: path)
+        if self.dataSource.count == 0 {
+            self.view.sendSubviewToBack(self.tableView)
+            self.drawNoDataView()
+        }else {
+            self.tableView.reloadData()
+            self.view.bringSubviewToFront(self.tableView)
+            
+        }
     }
     
-    
+    // MARK: table view 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.dataSource.count;
     }
@@ -52,13 +105,40 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let title = self.dataSource[indexPath.row]
-        let jsonString = self.readFileFromPathDocument(file: title)
+        let jsonString = RMQFileTool.readFileFromPathDocument(file: title)
         print("jsonString-> \(jsonString)")
+    }
+    
+    // MARK:  删除
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle != .delete {
+            return
+        }
+        if self.dataSource.count == 0 {
+            return
+        }
+        let fileName = self.dataSource[indexPath.row]
+        let pathURL = RMQFileTool.getFileFullPath(withFileName: fileName)
+        if pathURL == nil {
+            return
+        }
+        let success = RMQFileTool.deleteFile(inPathURL: pathURL!)
+        if success {
+            self.dataSource.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
+            self.updateDataSource()
+        }else {
+            
+        }
     }
     
     func sendMessageInIndexPath(indexPath: IndexPath) {
         let title = self.dataSource[indexPath.row]
-        let jsonString = self.readFileFromPathDocument(file: title)
+        let jsonString = RMQFileTool.readFileFromPathDocument(file: title)
         print("jsonString-> \(jsonString)")
         
         if let jsonData = jsonString.data(using: .utf8, allowLossyConversion: false) {
@@ -198,7 +278,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             if !(title == nil || title == "") {
                 print("jsonString:\(jsonString!)");
                 let fileName = title! + ".json"
-                self.writeFileToPathDocument(text: jsonString!, file: fileName)
+                RMQFileTool.writeFileToPathDocument(text: jsonString!, file: fileName)
                 self.updateDataSource()
                 self.tableView.reloadData()
             }else {
@@ -278,67 +358,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         alert.showInfo("Host Setting", subTitle: "", closeButtonTitle: "Cancel")
     }
     
-    func writeFileToPathDocument(text: String, file: String) {
-        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            let fileURL = dir.appendingPathComponent(file)
-            //writing
-            do {
-                try text.write(to: fileURL, atomically: false, encoding: .utf8)
-            }
-            catch {/* error handling here */}
-        }
-    }
     
-    func readFileFromPathDocument(file: String) -> String {
-        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            let fileURL = dir.appendingPathComponent(file)
-            
-            //reading
-            do {
-                let text = try String(contentsOf: fileURL, encoding: .utf8)
-                return text
-            }
-            catch {/* error handling here */
-                return ""
-            }
-        }
-        return ""
-    }
-    
-    /// 获取path路径下的所有文件或者目录的名字
-    ///
-    /// - Parameter path: path
-    /// - Returns: 路径下所有文件或者目录的名字
-    func getPaths(inPath path:String) -> [String] {
-        let manager = FileManager.default
-        var contentsOfPath:[String]?
-        do {
-            try contentsOfPath = manager.contentsOfDirectory(atPath: path)
-        } catch  {
-            contentsOfPath = []
-        }
-        
-        //contentsOfPath：Optional([fold1, test1.txt])
-        print("contentsOfPath: \(contentsOfPath!)")
-        if (contentsOfPath?.contains(".DS_Store"))! {
-            let index = contentsOfPath?.index(of: ".DS_Store")
-            contentsOfPath?.remove(at: index!)
-        }
-        for p:String in contentsOfPath! {
-            if(p.contains(" ")){
-                let index = contentsOfPath?.index(of:p)
-                contentsOfPath!.remove(at: index ?? 0)
-            }
-        }
-        return contentsOfPath!
-        
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "cell2editvc" {
             let indexPath = self.tableView.indexPathForSelectedRow
             let title = self.dataSource[indexPath!.row]
-            let jsonString = self.readFileFromPathDocument(file: title)
+            let jsonString = RMQFileTool.readFileFromPathDocument(file: title)
             let vc = segue.destination as! EditViewController
             vc.jsonString = jsonString
             vc.fileName = title
